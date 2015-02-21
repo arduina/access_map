@@ -1,7 +1,23 @@
-img{
-  width:1000px;
+/* this is where you can update the colors and styles for this project */
+
+#container img {
+  width:100%; /* width of the whole main container */
 }
 
 body {
-  font-family:helvetica;
+  margin: 20px; /* margin for the entire page */
+  font-family:helvetica; /* font for the whole page */
+  background: #111; /* background of entire page */
+  color:#111  ; /* body text color */
+}
+h1,h2,p {
+  background: #87CEEB; /* color of highlighting */
+  padding:10px; /* padding for highlighting */
+}
+p {
+  padding:10px 10px 20px 10px; /* padding for a paragraph */
+}
+#container {
+ width:100%; /* size of the map block */
+ margin: 0px auto; /* this line centers the container block */
 }
