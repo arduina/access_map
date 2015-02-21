@@ -18,10 +18,8 @@ You'll need:
 		<li>a map of your public transport system</li>
 		<li>an image manipulation program like GIMP</li>
 		<li>A github Account</li>
-		<li>The github App</li>
-		<li>Or basic git skills on your command line</li>
+		<li>The github App (Or basic git skills on your command line)</li>
 		<li>An editor like Sublime</li>
-
 	</ul>
 
 <b>1. Find a map</b>
