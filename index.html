@@ -1,10 +1,8 @@
-<HTML>
+<html>
 <head>
 	<title>Accessibility of the Berlin Nahverkehrssystem</title>
-	<h1 style="font-family:helvetica">What does Berlin look like for people in a wheelchair?</h1>
-	<p style="font-family:helvetiva">This is a visualization of the Berlin Public Transport System's degree of accessibility. The idea for this comes from the Hamburg initiative <a href="http://mappable.info">Mappable</a>.<br>
-	You can find an elaborate How-to <a href="https://github.com/arduina/access_map/blob/master/README.md">here.</a> </p>
 	<link rel="stylesheet" type="text/css" href="twentytwenty.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
 	<script type="text/javascript" src="jquery.js"></script>
 	<script type="text/javascript" src="jquery.event.move.js"></script>
 	<script type="text/javascript" src="jquery.twentytwenty.js"></script>
@@ -13,17 +11,16 @@
     		$("#container").twentytwenty();
 		});
 	</script>
-	<style type="text/css">
-		img{
-			width:1000px;
-		}
-	</style>
 </head>
 <body>
-	<div id="container"> 
-		<img src="map.jpg">  
-		<img src="map_erased.jpg"> 
+	<h1>What does Berlin look like for people in a wheelchair?</h1>
+	<p>This is a visualization of the Berlin Public Transport System's degree of accessibility. The idea for this comes from the Hamburg initiative <a href="http://mappable.info">Mappable</a>.<br>
+	You can find an elaborate How-to <a href="https://github.com/arduina/access_map/blob/master/README.md">here.</a> </p>
+
+	<div id="container">
+		<img src="map.jpg">
+		<img src="map_erased.jpg">
 	</div>
 </body>
 
-</HTML>
+</html>
