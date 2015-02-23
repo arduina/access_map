@@ -11,6 +11,65 @@
   <script type="text/javascript">
     $(window).load(function () {
       $("#container").twentytwenty();
+
+      var speed = 10;
+      var startPosition;
+      var minPosition;
+      var maxPosition;
+
+      function getPosition() {
+        return parseInt($('.twentytwenty-handle').css('left'), 10);
+      }
+
+      function setPosition(pos) {
+        console.log("setPosition", pos);
+        $('.twentytwenty-handle').css('left', pos + "px");
+      }
+
+      function setClipping(pos) {
+        var clip = $('.twentytwenty-before').css('clip');
+        var parts = clip.split(" ");
+        parts[1] = pos + "px";
+        $('.twentytwenty-before').css('clip', parts.join(' '));
+      }
+
+      function getDistance(evt) {
+        if (isCursorLeftKey(evt)) {
+          return -1 * speed;
+        }
+        if (isCursorRightKey(evt)) {
+          return speed;
+        }
+        return 0;
+      }
+
+      function isCursorLeftKey(evt) {
+        return evt.which === 37;
+      }
+
+      function isCursorRightKey(evt) {
+        return evt.which === 39;
+      }
+
+      function initImageSize(){
+        if(maxPosition === undefined){
+          minPosition = 0;
+          maxPosition = getPosition() * 2;
+        }
+      }
+
+      $("body").keydown(function (evt) {
+        console.log("keydown", evt);
+        initImageSize();
+        var distance = getDistance(evt);
+        if (distance !== 0) {
+          var pos = getPosition() + distance;
+          pos = Math.max(minPosition, Math.min(maxPosition, pos));
+          setPosition(pos);
+          setClipping(pos);
+        }
+      });
+
     });
   </script>
 </head>
