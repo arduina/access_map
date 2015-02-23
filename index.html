@@ -1,26 +1,93 @@
 <html>
 <head>
-	<title>Accessibility of the Berlin Nahverkehrssystem</title>
-	<link rel="stylesheet" type="text/css" href="twentytwenty.css">
-	<link rel="stylesheet" type="text/css" href="style.css">
-	<script type="text/javascript" src="jquery.js"></script>
-	<script type="text/javascript" src="jquery.event.move.js"></script>
-	<script type="text/javascript" src="jquery.twentytwenty.js"></script>
-	<script type="text/javascript">
-		$(window).load(function() {
-    		$("#container").twentytwenty();
-		});
-	</script>
-</head>
-<body>
-	<h1>What does Berlin look like for people in a wheelchair?</h1>
-	<p>This is a visualization of the Berlin Public Transport System's degree of accessibility. The idea for this comes from the Hamburg initiative <a href="http://mappable.info">Mappable</a>.<br>
-	You can find an elaborate How-to <a href="https://github.com/arduina/access_map/blob/master/README.md">here.</a> </p>
+  <title>Accessibility of the Berlin Nahverkehrssystem</title>
+  <link rel="stylesheet" type="text/css" href="twentytwenty.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
 
-	<div id="container">
-		<img src="map.jpg">
-		<img src="map_erased.jpg">
-	</div>
+  <script type="text/javascript" src="jquery.js"></script>
+  <script type="text/javascript" src="jquery.event.move.js"></script>
+  <script type="text/javascript" src="jquery.twentytwenty.js"></script>
+
+  <script type="text/javascript">
+    $(window).load(function () {
+      $("#container").twentytwenty();
+
+      var speed = 10;
+      var startPosition;
+      var minPosition;
+      var maxPosition;
+
+      function getPosition() {
+        return parseInt($('.twentytwenty-handle').css('left'), 10);
+      }
+
+      function setPosition(pos) {
+        console.log("setPosition", pos);
+        $('.twentytwenty-handle').css('left', pos + "px");
+      }
+
+      function setClipping(pos) {
+        var clip = $('.twentytwenty-before').css('clip');
+        var parts = clip.split(" ");
+        parts[1] = pos + "px";
+        $('.twentytwenty-before').css('clip', parts.join(' '));
+      }
+
+      function getDistance(evt) {
+        if (isCursorLeftKey(evt)) {
+          return -1 * speed;
+        }
+        if (isCursorRightKey(evt)) {
+          return speed;
+        }
+        return 0;
+      }
+
+      function isCursorLeftKey(evt) {
+        return evt.which === 37;
+      }
+
+      function isCursorRightKey(evt) {
+        return evt.which === 39;
+      }
+
+      function initImageSize(){
+        if(maxPosition === undefined){
+          minPosition = 0;
+          maxPosition = getPosition() * 2;
+        }
+      }
+
+      $("body").keydown(function (evt) {
+        console.log("keydown", evt);
+        initImageSize();
+        var distance = getDistance(evt);
+        if (distance !== 0) {
+          var pos = getPosition() + distance;
+          pos = Math.max(minPosition, Math.min(maxPosition, pos));
+          setPosition(pos);
+          setClipping(pos);
+        }
+      });
+
+    });
+  </script>
+</head>
+
+<body>
+<h1>What does Berlin look like for people in a wheelchair?</h1>
+
+<p>This is a visualization of the Berlin Public Transport System's degree of accessibility. The idea for this comes from
+  the Hamburg initiative <a href="http://mappable.info">Mappable</a>.<br>
+  You can find an elaborate How-to <a href="https://github.com/arduina/access_map">here.</a></p>
+
+<p>Drag the handle in the middle of the screen to the left or to the right. You can also use the left/right cursor keys
+  on your keyboard instead of the mouse. </p>
+
+<div id="container">
+  <img src="map.jpg">
+  <img src="map_erased.jpg">
+</div>
 </body>
 
 </html>
